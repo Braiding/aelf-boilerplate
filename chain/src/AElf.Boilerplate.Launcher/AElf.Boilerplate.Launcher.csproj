@@ -2,8 +2,25 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Launcher</RootNamespace>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AElf.Boilerplate.Mainchain\AElf.Boilerplate.Mainchain.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="AElf.Runtime.CSharp.ExecutiveTokenPlugin" Version="0.7.2-alpha.1" />
+    <PackageReference Include="AElf.Runtime.CSharp" Version="0.7.2-alpha.1" />
+    <PackageReference Include="AElf.RuntimeSetup" Version="0.7.2-alpha.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="0.15.0" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="0.15.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Content Include="appsettings.Development.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -11,14 +28,49 @@
     <Content Include="appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="appsettings.MainChain.MainNet.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
+  
   <ItemGroup>
-    <PackageReference Include="AElf.Sdk.CSharp" Version="0.7.1-alpha.1" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="0.15.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="0.15.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\..\contract\AElf.Contracts.BingoGameContract\AElf.Contracts.BingoGameContract.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="..\..\contract\AElf.Contracts.HelloWorldContract\AElf.Contracts.HelloWorldContract.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProjectReference>
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\AElf.Boilerplate.Mainchain\AElf.Boilerplate.Mainchain.csproj" />
+    <PackageReference Include="AElf.Contracts.Consensus.AEDPoS" Version="0.7.2-alpha.1">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </PackageReference>
+    <PackageReference Include="AElf.Contracts.Election" Version="0.7.2-alpha.1">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </PackageReference>
+    <PackageReference Include="AElf.Contracts.Profit" Version="0.7.2-alpha.1">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </PackageReference>
+    <PackageReference Include="AElf.Contracts.Vote" Version="0.7.2-alpha.1">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </PackageReference>
+    <PackageReference Include="AElf.Contracts.MultiToken" Version="0.7.2-alpha.1">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Contract</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </PackageReference>
   </ItemGroup>
 </Project>

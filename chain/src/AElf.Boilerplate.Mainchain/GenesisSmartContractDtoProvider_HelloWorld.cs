@@ -1,6 +1,8 @@
 using System.Collections.Generic;
-using AElf.Kernel;
+using System.Linq;
+using Acs0;
 using AElf.OS.Node.Application;
+using AElf.Types;
 
 namespace AElf.Blockchains.MainChain
 {
@@ -10,16 +12,11 @@ namespace AElf.Blockchains.MainChain
         {
             var l = new List<GenesisSmartContractDto>();
 
-            l.AddGenesisSmartContract<HelloWorldContract.HelloWorldContract>(
-                Hash.FromString("HelloWorldContract"), GenerateHelloWorldInitializationCallList());
+            l.AddGenesisSmartContract(
+                _codes.Single(kv=>kv.Key.Contains("HelloWorld")).Value,
+                Hash.FromString("AElf.ContractNames.HelloWorldContract"), new SystemContractDeploymentInput.Types.SystemTransactionMethodCallList());
 
             return l;
-        }
-
-        private SystemContractDeploymentInput.Types.SystemTransactionMethodCallList GenerateHelloWorldInitializationCallList()
-        {
-            var profitContractMethodCallList = new SystemContractDeploymentInput.Types.SystemTransactionMethodCallList();
-            return profitContractMethodCallList;
         }
     }
 }

@@ -1,10 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
+using Acs0;
 using AElf;
 using AElf.Kernel;
+using AElf.Kernel.Consensus;
 using AElf.Kernel.Consensus.AEDPoS;
 using AElf.Kernel.Token;
 using AElf.OS.Node.Application;
-using BingoGameContract;
+using AElf.Types;
+using AElf.Contracts.BingoGameContract;
+using Google.Protobuf.WellKnownTypes;
 
 namespace AElf.Blockchains.MainChain
 {
@@ -14,21 +19,21 @@ namespace AElf.Blockchains.MainChain
         {
             var l = new List<GenesisSmartContractDto>();
 
-            l.AddGenesisSmartContract<BingoGameContract.BingoGameContract>(
-                Hash.FromString("BingoGameContract"), GenerateBingoGameInitializationCallList());
+            l.AddGenesisSmartContract(
+                _codes.Single(kv => kv.Key.Contains("Bingo")).Value,
+                Hash.FromString("AElf.ContractNames.BingoGameContract"), GenerateBingoGameInitializationCallList());
 
             return l;
         }
 
-        private SystemContractDeploymentInput.Types.SystemTransactionMethodCallList GenerateBingoGameInitializationCallList()
+        private SystemContractDeploymentInput.Types.SystemTransactionMethodCallList
+            GenerateBingoGameInitializationCallList()
         {
-            var bingoGameContractMethodCallList = new SystemContractDeploymentInput.Types.SystemTransactionMethodCallList();
-            bingoGameContractMethodCallList.Add(nameof(BingoGameContract.BingoGameContract.InitialBingoGame),
-                new InitialBingoGameInput
-                {
-                    TokenContractSystemName = TokenSmartContractAddressNameProvider.Name,
-                    ConsensusContractSystemName = ConsensusSmartContractAddressNameProvider.Name
-                });
+            var bingoGameContractMethodCallList =
+                new SystemContractDeploymentInput.Types.SystemTransactionMethodCallList();
+            bingoGameContractMethodCallList.Add(
+                nameof(BingoGameContractContainer.BingoGameContractStub.Initial),
+                new Empty());
             return bingoGameContractMethodCallList;
         }
     }
